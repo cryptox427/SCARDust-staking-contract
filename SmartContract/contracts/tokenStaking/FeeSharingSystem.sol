@@ -149,8 +149,8 @@ contract FeeSharingSystem is ReentrancyGuard, Ownable {
         userInfo[msg.sender].rewards = 0;
 
         // Transfer reward token to sender
-        rewardToken.safeTransfer(msg.sender, scarRewards);
-        ScarDustToken.safeTransfer(msg.sender, wethRewards);
+        rewardToken.safeTransfer(msg.sender, wethRewards);
+        ScarDustToken.safeTransfer(msg.sender, scarRewards);
 
         emit Harvest(msg.sender, scarRewards);
     }
@@ -291,7 +291,7 @@ contract FeeSharingSystem is ReentrancyGuard, Ownable {
     function _rewardPerTokenWETH() internal view returns (uint256) {
 
         uint256 totalsupply = ScarDustToken.totalSupply();
-        
+
         if (totalsupply == 0) {
             return rewardPerTokenStored;
         }
